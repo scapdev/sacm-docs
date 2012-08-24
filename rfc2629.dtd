@@ -1,0 +1,311 @@
+bplist00Ñ_WebMainResourceÕ	
+_WebResourceData_WebResourceMIMEType_WebResourceTextEncodingName_WebResourceFrameName^WebResourceURLO%¾<html><head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">&lt;!--
+  revised DTD for the RFC document series, draft of 2008-02-01
+  --&gt;
+
+
+&lt;!--
+  Typical invocation:
+      &lt;!DOCTYPE rfc PUBLIC "-//IETF//DTD RFC 2629//EN"
+                           "http://xml.resource.org/authoring/rfc2629.dtd" [
+        ... dtd subset ...
+      ]&gt;
+    or
+      &lt;!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+        ... dtd subset ...
+      ]&gt;
+  --&gt;
+
+
+&lt;!--
+  Contents
+
+    Character entities
+
+    DTD data types
+
+    The top-level
+
+    Front matter
+
+    The Body
+
+    Back matter
+  --&gt;
+
+
+&lt;!--
+  Character entities
+  --&gt;
+
+
+&lt;!ENTITY % rfc2629-xhtml
+         PUBLIC "-//IETF//ENTITIES XHTML subset for RFC 2629//EN"
+                "rfc2629-xhtml.ent"&gt;
+%rfc2629-xhtml;
+
+&lt;!ENTITY % rfc2629-other
+         PUBLIC "-//IETF//ENTITIES Other for RFC 2629//EN"
+                "rfc2629-other.ent"&gt;
+%rfc2629-other;
+
+
+&lt;!--
+  DTD data types:
+
+        entity        description
+        ======        ===============================================
+        NUMBER        [0-9]+
+        NUMBERS       a comma-separated list of NUMBER
+
+        DAY           the day of the month, e.g., "1"
+        MONTH         the month of the year, e.g., "January"
+        YEAR          a four-digit year, e.g., "1999"
+
+        URI           e.g., "http://invisible.net/"
+
+        ATEXT/CTEXT   printable ASCII text (no line-terminators)
+
+        TEXT          character data
+  --&gt;
+
+
+&lt;!ENTITY % NUMBER     "CDATA"&gt;
+&lt;!ENTITY % NUMBERS    "CDATA"&gt;
+
+&lt;!ENTITY % DAY        "CDATA"&gt;
+&lt;!ENTITY % MONTH      "CDATA"&gt;
+&lt;!ENTITY % YEAR       "CDATA"&gt;
+
+&lt;!ENTITY % URI        "CDATA"&gt;
+
+&lt;!ENTITY % ATEXT      "CDATA"&gt;
+&lt;!ENTITY % CTEXT      "#PCDATA"&gt;
+
+&lt;!ENTITY % TEXT       "#PCDATA"&gt;
+
+&lt;!ENTITY   rfc.number "XXXX"&gt;
+
+
+&lt;!--
+  The top-level
+  --&gt;
+
+
+&lt;!--
+  attributes for the "rfc" element are supplied by the RFC
+  editor. when preparing drafts, authors should leave them blank.
+
+  the "seriesNo" attribute is used if the category is, e.g., BCP.
+  --&gt;
+&lt;!ELEMENT rfc         (front,middle,back?)&gt;
+&lt;!ATTLIST rfc
+          number      %NUMBER;           #IMPLIED
+          obsoletes   %NUMBERS;          ""
+          updates     %NUMBERS;          ""
+          category    (std|bcp|info|exp|historic)
+                                         #IMPLIED
+          seriesNo    %NUMBER;           #IMPLIED
+          ipr         (full2026|noDerivativeWorks2026|none
+                      |full3667|noModification3667|noDerivatives3667
+                      |full3978|noModification3978|noDerivatives3978)
+                                         #IMPLIED
+          iprExtract  IDREF              #IMPLIED
+          submissionType
+                      (IETF|independent) "IETF"
+          docName     %ATEXT;            #IMPLIED
+          xml:lang    %ATEXT;            "en"&gt;
+
+
+&lt;!--
+  Front matter
+  --&gt;
+
+
+&lt;!ELEMENT front       (title,author+,date,area*,workgroup*,keyword*,
+                       abstract?,note*)&gt;
+
+&lt;!-- the "abbrev" attribute is used for headers, etc. --&gt;
+&lt;!ELEMENT title       (%CTEXT;)&gt;
+&lt;!ATTLIST title
+          abbrev      %ATEXT;            #IMPLIED&gt; 
+
+&lt;!ELEMENT author      (organization,address?)&gt;
+&lt;!ATTLIST author
+          initials    %ATEXT;            #IMPLIED
+          surname     %ATEXT;            #IMPLIED
+          fullname    %ATEXT;            #IMPLIED
+          role        (editor)           #IMPLIED&gt;
+
+&lt;!ELEMENT organization
+                      (%CTEXT;)&gt;
+&lt;!ATTLIST organization
+          abbrev      %ATEXT;            #IMPLIED&gt; 
+ 
+&lt;!ELEMENT address     (postal?,phone?,facsimile?,email?,uri?)&gt;
+
+&lt;!-- this content model should be more strict:
+     at most one of each the city, region, code, and country
+     elements may be present --&gt;
+&lt;!ELEMENT postal      (street+,(city|region|code|country)*)&gt;
+&lt;!ELEMENT street      (%CTEXT;)&gt;
+&lt;!ELEMENT city        (%CTEXT;)&gt;
+&lt;!ELEMENT region      (%CTEXT;)&gt;
+&lt;!ELEMENT code        (%CTEXT;)&gt;
+&lt;!ELEMENT country     (%CTEXT;)&gt;
+&lt;!ELEMENT phone       (%CTEXT;)&gt;
+&lt;!ELEMENT facsimile   (%CTEXT;)&gt;
+&lt;!ELEMENT email       (%CTEXT;)&gt;
+&lt;!ELEMENT uri         (%CTEXT;)&gt;
+
+&lt;!ELEMENT date        EMPTY&gt;
+&lt;!ATTLIST date
+          day         %DAY;              #IMPLIED
+          month       %MONTH;            #IMPLIED
+          year        %YEAR;             #IMPLIED&gt;
+
+&lt;!-- meta-data... --&gt;
+&lt;!ELEMENT area        (%CTEXT;)&gt;
+&lt;!ELEMENT workgroup   (%CTEXT;)&gt;
+&lt;!ELEMENT keyword     (%CTEXT;)&gt;
+
+&lt;!ELEMENT abstract    (t)+&gt;
+&lt;!ELEMENT note        (t)+&gt;
+&lt;!ATTLIST note
+          title       %ATEXT;            #REQUIRED&gt;
+
+
+&lt;!--
+  The body
+  --&gt;
+
+
+&lt;!-- later on, may be (section+,appendix*,section*) --&gt;
+&lt;!ELEMENT middle      (section+)&gt;
+
+&lt;!ELEMENT section     ((t|figure|texttable|iref)*,section*)&gt;
+&lt;!ATTLIST section
+          anchor      ID                 #IMPLIED
+          title       %ATEXT;            #REQUIRED
+          toc         (include|exclude|default)
+                                         "default"&gt;
+
+&lt;!--
+&lt;!ELEMENT appendix    ((t|figure|texttable|iref)*,appendix*)&gt;
+&lt;!ATTLIST appendix
+          anchor      ID                 #IMPLIED
+          title       %ATEXT;            #REQUIRED
+          toc         (include|exclude|default)
+                                         "default"&gt;
+  --&gt;
+
+&lt;!-- use of &lt;figure/&gt; is deprecated... --&gt;
+&lt;!ELEMENT t           (%TEXT;|list|figure|xref|eref|iref|cref|spanx|vspace)*&gt;
+&lt;!ATTLIST t
+          anchor      ID                 #IMPLIED
+          hangText    %ATEXT;            #IMPLIED&gt;
+
+&lt;!-- the value of the style attribute is inherited from the closest 
+     parent --&gt;
+&lt;!ELEMENT list        (t+)&gt;
+&lt;!ATTLIST list
+          style       %ATEXT;            #IMPLIED
+          hangIndent  %NUMBER;           #IMPLIED
+          counter     %ATEXT;            #IMPLIED&gt;
+
+&lt;!ELEMENT xref        (%CTEXT;)&gt;
+&lt;!ATTLIST xref
+          target      IDREF              #REQUIRED
+          pageno      (true|false)       "false"
+          format      (counter|title|none|default)
+                                         "default"&gt;
+
+&lt;!ELEMENT eref        (%CTEXT;)&gt;
+&lt;!ATTLIST eref
+          target      %URI;              #REQUIRED&gt;
+
+&lt;!ELEMENT iref        EMPTY&gt;
+&lt;!ATTLIST iref
+          item        %ATEXT;            #REQUIRED
+          subitem     %ATEXT;            ""
+          primary    (true|false)       "false"&gt;
+
+&lt;!ELEMENT cref        (%CTEXT;)&gt;
+&lt;!ATTLIST cref
+          anchor      ID                 #IMPLIED
+          source      %ATEXT;            #IMPLIED&gt;
+
+&lt;!ELEMENT spanx       (%CTEXT;)&gt;
+&lt;!ATTLIST spanx
+          xml:space   (default|preserve) "preserve"
+          style       %ATEXT;            "emph"&gt;
+
+&lt;!ELEMENT vspace      EMPTY&gt;
+&lt;!ATTLIST vspace
+          blankLines  %NUMBER;           "0"&gt;
+
+&lt;!ELEMENT figure      (iref*,preamble?,artwork,postamble?)&gt;
+&lt;!ATTLIST figure
+          anchor      ID                 #IMPLIED
+          title       %ATEXT;            ""
+          suppress-title (true|false)    "false"
+          src         %URI;              #IMPLIED
+          align       (left|center|right) "left"
+          alt         %ATEXT;            ""
+          width       %ATEXT;            ""
+          height      %ATEXT;            ""&gt;
+
+&lt;!ELEMENT preamble    (%TEXT;|xref|eref|iref|cref|spanx)*&gt;
+&lt;!ELEMENT artwork     (%TEXT;)*&gt;
+&lt;!ATTLIST artwork
+          xml:space   (default|preserve) "preserve"
+          name        %ATEXT;            ""
+          type        %ATEXT;            ""
+          src         %URI;              #IMPLIED
+          align       (left|center|right) "left"
+          alt         %ATEXT;            ""
+          width       %ATEXT;            ""
+          height      %ATEXT;            ""&gt;
+
+&lt;!ELEMENT postamble   (%TEXT;|xref|eref|iref|cref|spanx)*&gt;
+    
+&lt;!ELEMENT texttable   (preamble?,ttcol+,c*,postamble?)&gt;
+&lt;!ATTLIST texttable
+          anchor      ID                 #IMPLIED
+          title       %ATEXT;            ""
+          suppress-title (true|false)    "false"
+          align       (left|center|right) "center"
+          style       (all|none|headers|full) "full"&gt;
+&lt;!ELEMENT ttcol       (%CTEXT;)&gt;
+&lt;!ATTLIST ttcol
+          width       %ATEXT;            #IMPLIED
+          align       (left|center|right) "left"&gt;
+&lt;!ELEMENT c           (%TEXT;|xref|eref|iref|cref|spanx)*&gt;
+
+
+&lt;!--
+  Back matter
+  --&gt;
+
+
+&lt;!-- sections, if present, are appendices --&gt;
+&lt;!ELEMENT back        (references*,section*)&gt;
+
+&lt;!ELEMENT references  (reference+)&gt;
+&lt;!ATTLIST references
+          title       %ATEXT;            "References"&gt;
+&lt;!ELEMENT reference   (front,seriesInfo*,format*,annotation*)&gt;
+&lt;!ATTLIST reference
+          anchor      ID                 #IMPLIED
+          target      %URI;              #IMPLIED&gt;
+&lt;!ELEMENT seriesInfo  EMPTY&gt;
+&lt;!ATTLIST seriesInfo
+          name        %ATEXT;            #REQUIRED
+          value       %ATEXT;            #REQUIRED&gt;
+&lt;!ELEMENT format      EMPTY&gt;
+&lt;!ATTLIST format
+          target      %URI;              #IMPLIED
+          type        %ATEXT;            #REQUIRED
+          octets      %NUMBER;           #IMPLIED&gt;
+&lt;!ELEMENT annotation  (%TEXT;|xref|eref|iref|cref|spanx)*&gt;
+</pre></body></html>Ztext/plainUUTF-8P_?http://www.w3.org/2008/xmlsec/Drafts/algorithms-rfc/rfc2629.dtd    ( : P n … ”&V&a&g&h                           &ª

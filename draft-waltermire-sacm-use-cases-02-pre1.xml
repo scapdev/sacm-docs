@@ -71,7 +71,23 @@
         <email>david.waltermire@nist.gov</email>
       </address>
     </author>
-
+    
+    <author fullname="Adam W. Montville" initials="A.W.M." 
+      surname="Montville">
+      <organization abbrev="TW">Tripwire, Inc.</organization>
+      
+      <address>
+        <postal>
+          <street>101 SW Main Street, Suite 1500</street>
+          <city>Portland</city>
+          <region>Oregon</region>
+          <code>97204</code>
+          <country>USA</country>
+        </postal>
+        <phone></phone>
+        <email>amontville@tripwire.com</email>
+      </address>
+    </author>
     <date year="2012" />
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
@@ -100,24 +116,51 @@
          keywords will be used for the search engine. -->
 
     <abstract>
-      <t>This document identifies foundational use cases, derived functional capabilities and requirements, architectural components, and the supporting standards needed to define an interoperable, automation infrastructure required to support timely, accurate and actionable situational awareness over an organization's IT systems.  Automation tools implementing a continuous monitoring approach will utilize this infrastructure together with existing and emerging event, incident and network management standards to provide visibility into the state of assets, user activities and network behavior.  Stakeholders will be able to use these tools to aggregate and analyze relevant security and operational data to understand the organizations security posture, quantify business risk, and make informed decisions that support organizational objectives while protecting critical information.  Organizations will be able to use these tools to augment and automate information sharing activities to collaborate with partners to identify and mitigate threats. Other automation tools will be able to integrate with these capabilities to enforce policies based on human decisions to harden systems, prevent misuse and reduce the overall attack surface.</t>
+      <t>This document identifies foundational use cases, derived functional capabilities and requirements, 
+        architectural components, and the supporting standards needed to define an interoperable,
+        automation\infrastructure required to support timely, accurate and actionable situational awareness
+        over an organization's IT systems.  Automation tools implementing a continuous monitoring approach 
+        will utilize this infrastructure together with existing and emerging event, incident and network 
+        management standards to provide visibility into the state of assets, user activities and
+        network \behavior.  Stakeholders will be able to use these tools to aggregate and analyze relevant 
+        security and operational data to understand the organizations security posture, quantify business 
+        risk, and make informed decisions that support organizational objectives while protecting critical 
+        information.  Organizations will be able to use these tools to augment and automate information 
+        sharing activities to collaborate with partners to identify and mitigate threats. Other automation 
+        tools will be able to integrate with these capabilities to enforce policies based on human decisions 
+        to harden systems, prevent misuse and reduce the overall attack surface.</t>
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t>This document addresses foundational use cases in security automation. Portions of these use cases may be considered when establishing a charter for the Security Automation and Continuous Monitoring (SACM) working group within the IETF.  This working group will address a portion of the standards needed to define an interoperable, automation infrastructure required to support timely, accurate and actionable situational awareness over an organization's IT systems. This document enumerates use cases and break down related concepts that cross many IT security information domains.</t>
+      <t>This document addresses foundational use cases in security automation. Portions of these use cases 
+        may be considered when establishing a charter for the Security Automation and Continuous Monitoring 
+        (SACM) working group within the IETF.  This working group will address a portion of the standards 
+        needed to define an interoperable, automation infrastructure required to support timely, accurate and 
+        actionable situational awareness over an organization's IT systems. This document enumerates use cases 
+        and break down related concepts that cross many IT security information domains.</t>
+      
       <t>Sections [...] of this document focus on:
         <list>
           <t>Defining the key concepts and terminology used within the document providing a common frame of reference;</t>
           <t>Identifying foundational use cases that represent classes of stakeholders, goals, and usage scenarios;</t>
           <t>A set of derived functional capabilities and associated requirements that are needed to support the use cases;</t>
           <t>A break down of architectural components that address one or more functional capabilities that can be used in various combinations to support the use cases; and</t>
-          <t>An inventory of existing, emerging, and needed data exchange models and communications protocols that are required to support interoperability between architectural components.</t>
+          <t>An inventory of existing, emerging, and needed data exchange models and communications protocols that are 
+            required to support interoperability between architectural components.</t>
         </list>
       </t>
 
-      <t>The standards identified in this document provide a foundation for creating interoperable automation tools and continuous monitoring solutions that provide visibility into the state of assets, user activities, and network behavior.  Stakeholders will be able to use these tools to aggregate and analyze relevant security and operational data to understand the organizations security posture, quantify business risk, and make informed decisions that support organizational objectives while protecting critical information.  Organizations will be able to use these tools to augment and automate information sharing activities to collaborate with partners to identify and mitigate threats. Other automation tools will be able to integrate with these capabilities to enforce policies based on human decisions to harden systems, prevent misuse and reduce the overall attack surface.</t>
+      <t>The standards identified in this document provide a foundation for creating interoperable automation tools 
+        and continuous monitoring solutions that provide visibility into the state of assets, user activities, and 
+        network behavior.  Stakeholders will be able to use these tools to aggregate and analyze relevant security 
+        and operational data to understand the organizations security posture, quantify business risk, and make 
+        informed decisions that support organizational objectives while protecting critical information.  Organizations
+        will be able to use these tools to augment and automate information sharing activities to collaborate with 
+        partners to identify and mitigate threats. Other automation tools will be able to integrate with these 
+        capabilities to enforce policies based on human decisions to harden systems, prevent misuse and reduce the 
+        overall attack surface.</t>
 
       <section title="Requirements Language">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -326,15 +369,113 @@
         </list>
       </t>
 
-      <section title="Functional Capability 1">
-        <t>Describe the first capability.</t>
-      </section>
+      <t>The present focus is on UC1 (Assessment and Enforcement of Acceptable State) and UC3
+        (Security Control Verification and Monitoring).  Future efforts may provide further
+        functional capbility decomposition of use cases UC2, UC4, and UC5.  UC1 and UC3 are similar
+        with respect to the capabilities they require.  In general, the activities of managing
+        assets, configurations, and vulnerabilities are common between UC1 and UC3.  UC1 uses these
+        activities to either grant or deny an entity access to a requested resource.  UC3 uses these
+        activities in support of compliance measurement on a periodic basis.</t>
+      
+      <t>At the most basic levels, an enterprise needing to satisfy UC1 and UC3 will need specific
+      capabilities to be met.  These are described as follows.</t>
+      
 
-      <section title="Functional Capability n">
-        <t>Describe the n capability.</t>
+      <t>We're essentially talking about security and compliance, perhaps with a little bit of
+        risk mixed in.  This is the central problem domain, so it makes sense to be able to convey
+      information about technical and non-technical controls, benchmarks, control requirements,
+      control frameworks and other concepts in a common way.</t>
+      
+      <section title="Capabilities Supporting Use Case 1">
+        <t>As described in section 3.1, the required capabilities need to support assessing host
+          and/or network state in an automated manner.  This is, essentially, a configuration
+          assessment check before allowing a full connection to the network.</t>
+        
+       
+        <section title="Asset Management">
+          <section title="Asset Characterization">
+            <section title="Logical Characterization">
+            </section>
+            <section title="Security Characterization">
+            </section>
+          </section>
+          <section title="Asset Discovery">
+          </section>
+        </section>
+        
+        <section title="Data Collection">
+          <section title="Security Configuration Management">
+            <section title="Assessment">
+              <section title="Non-technical Control Assessment">
+                <section title="Interrogative">
+                </section>
+              </section>
+              <section title="Technical Control Assessment">
+              </section>
+              <section title="Scoring">
+              </section>
+            </section>
+            <section title="Remediation">
+              <section title="Non-technical Remediation">
+              </section>
+              <section title="Technical Remediation">
+                <section title="Configuration Remediation">
+                </section>
+                <section title="Patch Remediation">
+                </section>
+                <section title="Object State">
+                </section>
+              </section>
+            </section>
+          </section>
+          <section title="Vulnerability Assessment">
+            <section title="Non-technical">
+            </section>
+            <section title="Technical">
+            </section>
+          </section>
+        </section>
+        <section title="Content Management">
+          <section title="Configuration Standards">
+          </section>
+          <section title="Scoring Models">
+          </section>
+          <section title="Vulnerability Informaiton">
+          </section>
+          <section title="Patch Information">
+          </section>
+          <section title="Asset Classification">
+          </section>
+          <section title="Tailoring">
+          </section>
+        </section>
       </section>
+      
+      <section title="Capabilities Supporting Use Case 3">
+        <t>Recall that UC3 is an extension of UC1 and therefore includes all of the capabilities
+        already described in the previous section.</t>
+        
+        <section title="Tasking and Scheduling">
+        </section>
+        <section title="Data Aggregation and Reporting">
+        </section>
+        <section title="Business Process Awareness">
+          <section title="Adding to Data Collection Needs">
+            <section title="Event Management">
+            </section>
+          </section>
+        </section>
+        
+        
+        
+      </section>
+      
+      
+   
+ 
     </section>
 
+    
     <section title="Functional Components">
       <t>Describe the abstract functional components needed to provide the capabilities described in the previous section.  Describe any relationships between the components and how they can be composed to address functional capabilities. (this might be better defined in the previous section.)</t>
       <t>Things to consider including (but not limited to):
@@ -343,6 +484,48 @@
           <t>Federation  Strategy</t>
         </list>
       </t>
+      
+
+      <section title="Asset Management">
+        <section title="Discovery">
+        </section>
+        <section title="Classification">
+          <section title="Logical">
+          </section>
+          <section title="Security">
+          </section>
+        </section>
+      </section>
+      
+      <section title="Vulnerability Assessment">
+        <t>Describe the n capability.</t>
+        <section title="Non-technical Vulnerability Assessment">
+        </section>
+        <section title="Technical Vulnerabiltiy Assessment">
+        </section>
+      </section>
+      
+      <section title="Security Configuration Management">
+        <section title="Configuration Assessment">
+          <section title="Non-technical Assessment">
+            <section title="Interrogative Assessment">
+            </section>
+          </section>
+          <section title="Technical Assessment">
+            <section title="Security Configuration Assessment">
+            </section>
+            <section title="Patch Assessment">
+            </section>
+            <section title="Object State Assessment">
+            </section>
+          </section>
+          <section title="Scoring">
+          </section>
+        </section> 
+      </section>     
+      
+      
+      
     </section>
 
     <section title="Data Exchange Models and Communications Protocols">
@@ -354,6 +537,99 @@
           <t>Reference any Security Automation work that is applicable.</t>
         </list>
       </t>
+      
+      <section title="Data Exchange Models">
+        <section title="Control Expression">
+          <t>For each we need an identification method, a logical expression and one or more syntactic
+          bindings to that expression.  For some, we may wish to associate a method of risk scoring.</t>
+          <section title="Technical Control Expression">
+          </section>
+          <section title="Non-technical Control Expression">
+            <section title="Configuration Controls">
+            </section>
+            <section title="Patches">
+            </section>
+            <section title="Vulnerabilities">
+            </section>
+            <section title="Object (Non-security) State">
+            </section>
+          </section>
+        </section>
+        
+        <section title="Control Frameworks">
+          <section title="Logical Expression and Syntactic Binding(s)">
+          </section>
+          <section title="Relationships">
+          </section>
+          <section title="Substantiation (Control Requirement)">
+          </section>
+          <section title="Reporting">
+          </section>
+        </section>
+        
+        <section title="Asset Expression">
+          <section title="Asset Identification">
+          </section>
+          <section title="Asset Classification (type)">
+          </section>
+          <section title="Asset Attributes">
+            <section title="Criticality">
+            </section>
+            <section title="Classification (security)">
+            </section>
+            <section title="Owner">
+            </section>
+            <section title="And so on...">
+            </section>
+          </section>
+          <section title="Information Expression (non-identifying">
+          </section>
+          <section title="Reporting">
+          </section>
+        </section>
+        
+        <section title="Benchmark/Checklist Expression">
+          <section title="Logical Expression and Bindings">
+          </section>
+          <section title="Checking Systems">
+          </section>
+          <section title="Results and Scoring">
+          </section>
+          <section title="Reporting">
+          </section>
+        </section>
+        
+        <section title="Check Language">
+          <section title="Logical Expression and Syntactic Binding(s)">
+            <section title="Technical">
+            </section>
+            <section title="Non-technical">
+            </section>
+          </section>
+          <section title="Reporting">
+          </section>
+        </section>
+        
+        
+        <section title="Targeting Expression">
+          <section title="Information Owner">
+          </section>
+          <section title="System Owner">
+            <section title="Computing Device(s)">
+            </section>
+            <section title="Network(s)">
+            </section>
+          </section>
+          <section title="Assessor">
+          </section>
+          <section title="Computing Device">
+          </section>
+        </section>
+      </section>
+      
+      <section title="Communication Protocols">
+      </section>
+      
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
